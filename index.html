@@ -1,11 +1,153 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pushing code to GitHub</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Simple Blog Layout</title>
+  <style>
+    /* ——— Base styles (background + font like before) ——— */
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+      color: #333;
+    }
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .post-header h1 { margin: 0; color: #4CAF50; }
+    .byline { font-size: 0.9rem; color: #666; }
+    .meta-dot { margin: 0 6px; }
+
+    figure { margin: 20px 0; text-align: center; }
+    figure img { max-width: 100%; border-radius: 8px; }
+    figcaption { font-size: 0.85rem; color: #555; margin-top: 5px; }
+
+    section { margin-bottom: 20px; }
+    h2 { color: #4CAF50; }
+    ul { padding-left: 20px; }
+    blockquote {
+      margin: 15px 0;
+      padding: 10px 15px;
+      background: #f0f0f0;
+      border-left: 5px solid #4CAF50;
+      font-style: italic;
+    }
+
+    a.read-more {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 15px;
+      background: #4CAF50;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+    a.read-more:hover { background: #45a049; }
+
+    /* ——— Read More functionality (no JS) ———
+       Target the <article id="post"> when hash is #post.
+       Show extra content, hide the button.
+    */
+    #extra-content { display: none; border-top: 1px solid #ddd; padding-top: 15px; margin-top: 20px; }
+    #post:target #extra-content { display: block; }
+    #post:target .read-more { display: none; }
+
+    /* Optional: smooth anchor scroll */
+    html { scroll-behavior: smooth; }
+  </style>
 </head>
 <body>
-    <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit, rem!</h1>
+  <div class="container">
+    <!-- Main landmark for accessibility -->
+    <main role="main">
+      <!-- Give the article an id to target with the Read More link -->
+      <article aria-labelledby="post-title" id="post">
+        <header class="post-header">
+          <h1 id="post-title">Blog Post Layout</h1>
+          <p class="byline">
+            <span>By <span rel="author">Raman James</span></span>
+            <span class="meta-dot">•</span>
+            <time datetime="2025-08-29">August 29, 2025</time>
+            <span class="meta-dot">•</span>
+            <span>5 min read</span>
+          </p>
+        </header>
+
+        <figure>
+          <img src="https://tse4.mm.bing.net/th/id/OIP.231vE9tmbu79fIGhzgRbbwHaEK?pid=Api&P=0&h=180" alt="Abstract photo banner used as the blog post image." />
+          <figcaption>A programmer writing code for a blog website.</figcaption>
+        </figure>
+
+        <!-- Content sections -->
+        <section aria-labelledby="introduction">
+          <h2 id="introduction">Introduction</h2>
+          <p>
+            A blog post is an online article published on a blog that shares information, ideas, or experiences on a specific topic in a structured way.
+          </p>
+          <p>
+            In today’s digital world, blogs have become one of the most powerful tools for sharing knowledge and opinions.
+            But what exactly is a blog post, and why is it important? In this article, we’ll explore the basics of blog posts and how they are used to communicate ideas online.
+          </p>
+        </section>
+
+        <section aria-labelledby="main-content">
+          <h2 id="main-content">Main Content</h2>
+          <p>Here are the core ideas we’ll cover:</p>
+          <ul>
+            <li>Use of semantic HTML to improve accessibility and SEO.</li>
+            <li>Clean structure with <code>&lt;main&gt;</code> and a single <code>&lt;article&gt;</code>.</li>
+            <li>Meaningful metadata with <code>&lt;time&gt;</code> for the publication date.</li>
+            <li>Illustrative media via <code>&lt;figure&gt;</code> and <code>&lt;figcaption&gt;</code>.</li>
+            <li>A concluding call-to-action with a <em>Read More</em> link.</li>
+          </ul>
+
+          <blockquote>
+            Semantic HTML isn’t just tidy—it's a signal to browsers, assistive tech, and search engines about the role of each part of your page.
+          </blockquote>
+        </section>
+
+        <section aria-labelledby="conclusion">
+          <h2 id="conclusion">Conclusion</h2>
+          <p>
+            Blog posts evolved from online diaries in the 1990s into professional tools for communication, marketing, and knowledge sharing today.
+          </p>
+        </section>
+
+        <!-- Footer with Read More trigger -->
+        <footer class="post-footer">
+          <!-- Clicking this sets the URL hash to #post, which targets the article and reveals #extra-content -->
+          <a class="read-more" href="#post" rel="bookmark" aria-controls="extra-content" aria-expanded="false">Read More →</a>
+        </footer>
+
+        <!-- Extra content revealed when #post is targeted -->
+        <div id="extra-content" aria-live="polite">
+          <h2>Extended Insights</h2>
+          <p>
+            Modern blogs often include multimedia like videos, podcasts, and interactive charts. Good articles balance readability
+            (short paragraphs, clear headings) with depth (original research, references).
+          </p>
+          <p>
+            Accessibility matters: use proper contrast, alt text on images, and semantic landmarks (<code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;footer&gt;</code>).
+          </p>
+
+          <h3>Practical Checklist</h3>
+          <ul>
+            <li>Write a compelling headline and meta description.</li>
+            <li>Break content into skimmable sections with meaningful subheadings.</li>
+            <li>Add illustrative media with captions and proper alt text.</li>
+            <li>End with a clear call-to-action or next steps.</li>
+          </ul>
+        </div>
+      </article>
+    </main>
+  </div>
 </body>
 </html>
